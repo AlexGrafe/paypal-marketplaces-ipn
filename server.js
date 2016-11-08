@@ -5,6 +5,15 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+var uuid = require('node-uuid');
+
+var firebase = require('firebase');
+
+firebase.initializeApp({
+    databaseURL:    'https://project--8640542991709206252.firebaseio.com',
+    serviceAccount: './project--8640542991709206252-firebase-adminsdk-mpa6l-cb88474a0a.json'
+});
+
 
 app.get('/', function (req, res) {
    res.send('Hello World');
@@ -12,7 +21,11 @@ app.get('/', function (req, res) {
 
 
 app.post('*', function (req, res) {
-    console.log("Got a POST request for the homepage", req);
+    //console.log("Got a POST request for the homepage", req);
+
+    // firebase
+    firebase.database().child('/' + uuid.v4()).set("hello world");
+
     res.json({
         "protocol":      req.protocol,
         "hostname":      req.hostname,
@@ -22,7 +35,7 @@ app.post('*', function (req, res) {
         "headers":       req.headers,
         "body":          req.body
     });
-})
+});
 
 
 
