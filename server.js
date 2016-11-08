@@ -23,10 +23,7 @@ app.get('/', function (req, res) {
 app.post('*', function (req, res) {
     //console.log("Got a POST request for the homepage", req);
 
-    // firebase
-    firebase.database().ref('/' + uuid.v4()).set("hello world");
-
-    res.json({
+    var payload = {
         "protocol":      req.protocol,
         "hostname":      req.hostname,
         "originalUrl":   req.originalUrl,
@@ -34,7 +31,12 @@ app.post('*', function (req, res) {
         "query":         req.query,
         "headers":       req.headers,
         "body":          req.body
-    });
+    };
+
+    // firebase
+    firebase.database().ref('/' + uuid.v4()).set(payload);
+
+    res.json(payload);
 });
 
 
