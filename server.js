@@ -12,19 +12,16 @@ app.get('/', function (req, res) {
 
 
 app.post('*', function (req, res) {
-   console.log("Got a POST request for the homepage", req);
-   res.send(JSON.stringify
-       (
-           {
-               "protocol":      req.protocol,
-               "hostname":      req.hostname,
-               "originalUrl":   req.originalUrl,
-               "path":          req.path,
-               "query":         req.query,
-               "headers":       req.headers,
-               "body":          req.body
-           }
-       ));
+    console.log("Got a POST request for the homepage", req);
+    res.json({
+        "protocol":      req.protocol,
+        "hostname":      req.hostname,
+        "originalUrl":   req.originalUrl,
+        "path":          req.path,
+        "query":         req.query,
+        "headers":       req.headers,
+        "body":          req.body
+    });
 })
 
 
