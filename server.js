@@ -24,7 +24,7 @@ app.post('*', function (req, res) {
     //console.log("Got a POST request for the homepage", req);
 
     // firebase
-    firebase.database().child('/' + uuid.v4()).set("hello world");
+    firebase.database().ref('/' + uuid.v4()).set("hello world");
 
     res.json({
         "protocol":      req.protocol,
